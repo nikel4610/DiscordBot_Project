@@ -26,6 +26,8 @@ def crawling_and_printing(url_prefix, start, end):
     for i in range(start, end + 1):
         url = url_prefix + str(i)
         times, headline_links, headlines = crawling_multiple(url)
+        # for j in range(len(headlines)):
+        #     print(times[j], headline_links[j], headlines[j])
 
 # TODO time 시간을 날짜와 시간으로 나눠서 저장해야 함 -> 후에 같은 날짜만 모아서 내용 요약 + 키워드 추출
 # TODO headline_link 기사의 본문을 크롤링해야 함 -> crawledNewsStory.py 에서 링크를 받아서 본문 내용만 크롤링 하는 코드 작성하기

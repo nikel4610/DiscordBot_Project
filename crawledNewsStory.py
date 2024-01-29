@@ -8,32 +8,16 @@ from bs4 import BeautifulSoup
 url_prefix = 'https://www.yna.co.kr/news/'
 crawling_and_printing(url_prefix, 1, 2) # 범위 설정
 
+# //*[@id="articleWrap"]/div[2]/div/div/article = xpath
+# 위의 xpath 에 있는 <p></p> 태그 안에 있는 본문 내용을 크롤링 하는 def
+# url은 crawling_multiple()에서 받아온 headline_link
+
 def crawling_news_story(url):
-    crawling_multiple(url)
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-
-    news_story = []
-
-    # //*[@id="articleWrap"]/div[2]/div/div/article/p[1]/text()
-    # TODO 이거 왜 안됨? Xpath 로 크롤링 하려는데 오류 남
-    # soupsieve.util.SelectorSyntaxError: Malformed attribute selector at position 1
-
-    for i in range(1, 100):
-        news_story_element = soup.select_one(f'//*[@id="articleWrap"]/div[2]/div/div/article/p[{i}]')
-        # 뒤에 /text() 붙은것도 있고 아닌것도 있음 번호 상관 없이 
-        if news_story_element:
-            news_story.append(news_story_element.text)
-        else:
-            break
-
+    news_story = soup.select_one('#articleWrap > div.content01.scroll-article-zone01 > div > div > article')
+    print(news_story.text)
     return news_story
 
-for i in range(1, 2):
-    url = url_prefix + str(i)
-    print(crawling_news_story(url))
-
-
-
-# -> test()가 붙은것과 안붙은것 차이? p[?] 번호에 상관없이 text()가 붙은것도 있고 아닌것도 있음
+crawling_news_story('https://www.yna.co.kr/view/AKR20240129101900061?section=news')
 
