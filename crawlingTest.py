@@ -9,6 +9,7 @@ def crawling_multiple(url):
     headline_links = []
     headlines = []
 
+    # TODO: range 대신 time element의 개수를 받아와서 그만큼 반복하도록 수정하기 (24시간)
     for i in range(1, 27):
         time_element = soup.select_one(f'#container > div > div > div.section01 > section > div.list-type038 > ul > li:nth-child({i}) > div > div.info-box01 > span.txt-time')
         headline_link_element = soup.select_one(f'#container > div > div > div.section01 > section > div.list-type038 > ul > li:nth-child({i}) > div > div.news-con > a')

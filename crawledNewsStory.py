@@ -6,10 +6,7 @@ from bs4 import BeautifulSoup
 # crawling_mulitple()에서 headline_link만 받아오기
 
 url_prefix = 'https://www.yna.co.kr/news/'
-crawling_and_printing(url_prefix, 1, 2) # 범위 설정
-
-# 위의 xpath 에 있는 <p></p> 태그 안에 있는 본문 내용을 크롤링 하는 def
-# url은 crawling_multiple()에서 받아온 headline_link
+# crawling_and_printing(url_prefix, 1, 2) # 범위 설정
 
 def crawling_news_story(url):
     response = requests.get(url)
@@ -19,6 +16,3 @@ def crawling_news_story(url):
     news_story = ' '.join(news_story)
     print(news_story)
     return news_story
-
-crawling_news_story('https://www.yna.co.kr/view/AKR20240129101900061?section=news')
-
